@@ -27,7 +27,7 @@ public class FileManagerMatrix extends FileManager<List<Matrix>> {
         }
 
         List<Matrix> values = IntStream.range(0, resultSplit.length)
-                .mapToObj(index -> new Matrix(line, index, convert(resultSplit[index])))
+                .mapToObj(index -> new Matrix(line + 1 , index + 1, convert(resultSplit[index])))
                 .collect(Collectors.toList());
 
         return values;

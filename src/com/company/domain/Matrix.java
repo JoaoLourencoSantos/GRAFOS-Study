@@ -2,14 +2,38 @@ package com.company.domain;
 
 public class Matrix {
 
-    private int firstAreaId;
-    private int secondAreaId;
+    private Integer firstAreaId;
+    private Integer secondAreaId;
 
-    private int disparity;
+    private Integer disparity;
 
-    public Matrix(int firstAreaId, int secondAreaId, int disparity) {
+    public Matrix(Integer firstAreaId, Integer secondAreaId, Integer disparity) {
         this.firstAreaId = firstAreaId;
         this.secondAreaId = secondAreaId;
+        this.disparity = disparity;
+    }
+
+    public Integer getFirstAreaId() {
+        return firstAreaId;
+    }
+
+    public void setFirstAreaId(int firstAreaId) {
+        this.firstAreaId = firstAreaId;
+    }
+
+    public Integer getSecondAreaId() {
+        return secondAreaId;
+    }
+
+    public void setSecondAreaId(int secondAreaId) {
+        this.secondAreaId = secondAreaId;
+    }
+
+    public Integer getDisparity() {
+        return disparity;
+    }
+
+    public void setDisparity(int disparity) {
         this.disparity = disparity;
     }
 

@@ -4,18 +4,25 @@ public class Vertex {
 
     private int vertexId;
     private int areaId;
-    private int disparity;
-    private int referenceVertex;
-
-    public Vertex(int vertexId, int areaId, int disparity, int referenceVertex) {
-        this.vertexId = vertexId;
-        this.areaId = areaId;
-        this.disparity = disparity;
-        this.referenceVertex = referenceVertex;
-    }
 
     public Vertex(int vertexId, int areaId) {
         this.vertexId = vertexId;
+        this.areaId = areaId;
+    }
+
+    public int getVertexId() {
+        return vertexId;
+    }
+
+    public void setVertexId(int vertexId) {
+        this.vertexId = vertexId;
+    }
+
+    public int getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(int areaId) {
         this.areaId = areaId;
     }
 
