@@ -20,6 +20,10 @@ public class InfoManager {
             for (Vertex vertex2 : listVertex) {
                 Integer area1 = vertex1.getAreaId(), area2 = vertex2.getAreaId();
 
+                if (vertex1.equals(vertex2)) {
+                    continue;
+                }
+
                 Edge edge = new Edge(vertex1, vertex2, findDisparityByVertex(area1, area2, listMatrix));
 
                 if (singleListResult.contains(edge)) {
