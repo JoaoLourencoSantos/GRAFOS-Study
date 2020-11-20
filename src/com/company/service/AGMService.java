@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class AGMService {
 
     List<Edge> result = new ArrayList<>();
-    List<List<Edge>> copyFork;
 
     public List<Edge> generatePrim(List<List<Edge>> fork){
         List<Integer> vertices = new ArrayList<>();
