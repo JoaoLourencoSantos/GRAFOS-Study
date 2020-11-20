@@ -21,24 +21,40 @@ public class AGMService {
         //de nVertices - 1, para encontrar todas as arestas
         for(int i = 0; i < fork.size() - 1; i++){
 
-            //dentro dos vertices que ja foram passados, pegar as menores arestas
+            //dentro dos vertices que ja foram passados, pega as menores arestas
             vertices.forEach((vertex) -> {
-                List<Edge> list =  fork.get(vertex);
+
+                //pega a lista de arestas do vertice desejado
+                List<Edge> list = fork.get(vertex);
+
                 if(list != null){
-                    Edge min = list.stream()
+
+                    list = list.stream()
+                            // o filter é necessário para nao ser escolhida uma aresta com um vertice que ja estava na lista,
+                            // dessa forma faria um ciclo
                             .filter((e) -> !vertices.contains(e.getSecondVertex().getVertexId() - 1))
                             .sorted(Comparator.comparingInt(Edge::getDisparity))
-                            .collect(Collectors.toList()).get(0);
-                    listMin.add(min);
+                            .collect(Collectors.toList());
+
+                    if(!list.isEmpty()) {
+                        Edge min = list.get(0);
+                        listMin.add(min);
+                    }
                 }
             });
 
-            //pegar a menor das menores arestas e incluir no resultado final
+            //pega a menor das menores arestas
             Edge min = listMin.stream()
                     .sorted(Comparator.comparingInt(Edge::getDisparity))
                     .collect(Collectors.toList()).get(0);
-            fork.get(min.getFirstVertex().getVertexId() - 1).remove(min);
+
+            //incluir essa menor aresta no resultado final (ja faz parte da AGM)
             result.add(min);
+
+            //necessário remover aresta que ja foi incluida na AGM para nao ser usada novamente
+            fork.get(min.getFirstVertex().getVertexId() - 1).remove(min);
+
+            //adicionar o vertice da aresta menor encontrada na lista de vertice que serao buscados na proxima iteracao
             vertices.add(min.getSecondVertex().getVertexId() - 1 );
 
             //limpar lista de menores
