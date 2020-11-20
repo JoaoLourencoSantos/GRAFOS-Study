@@ -21,7 +21,7 @@ public class AGMService {
         //de nVertices - 1, para encontrar todas as arestas
         for(int i = 0; i < fork.size() - 1; i++){
 
-            //dentro dos vertices que ja foram passados, pegar a menor aresta
+            //dentro dos vertices que ja foram passados, pegar as menores arestas
             vertices.forEach((vertex) -> {
                 List<Edge> list =  fork.get(vertex);
                 if(list != null){
@@ -33,7 +33,7 @@ public class AGMService {
                 }
             });
 
-            //pegar a menor das menores aresta e incluir no resultado final
+            //pegar a menor das menores arestas e incluir no resultado final
             Edge min = listMin.stream()
                     .sorted(Comparator.comparingInt(Edge::getDisparity))
                     .collect(Collectors.toList()).get(0);
