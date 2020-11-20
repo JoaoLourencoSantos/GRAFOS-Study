@@ -6,6 +6,7 @@ import com.company.dao.FileManagerVertex;
 import com.company.domain.Edge;
 import com.company.domain.Matrix;
 import com.company.domain.Vertex;
+import com.company.service.AGMService;
 import com.company.utils.InfoManager;
 
 import java.util.List;
@@ -22,6 +23,11 @@ public class Main {
         List<List<Edge>> result = InfoManager.buildListEdge(listVertex, listMatrix);
 
         print(result);
+
+        AGMService agmService = new AGMService();
+
+        //JA TEMOS A LISTA DE ARESTAS QUE REPRESENTA A ARVORE GERADORA MINIMA...
+        List<Edge> edges = agmService.generatePrim(result);
     }
 
 

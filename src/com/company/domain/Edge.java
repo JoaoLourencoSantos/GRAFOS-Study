@@ -21,4 +21,28 @@ public class Edge {
                 ", disparity=" + disparity +
                 '}';
     }
+
+    public Vertex getFirstVertex() {
+        return firstVertex;
+    }
+
+    public void setFirstVertex(Vertex firstVertex) {
+        this.firstVertex = firstVertex;
+    }
+
+    public Vertex getSecondVertex() {
+        return secondVertex;
+    }
+
+    public void setSecondVertex(Vertex secondVertex) {
+        this.secondVertex = secondVertex;
+    }
+
+    public int getDisparity() {
+        return disparity;
+    }
+
+    public void setDisparity(int disparity) {
+        this.disparity = disparity;
+    }
 }
