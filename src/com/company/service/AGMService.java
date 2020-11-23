@@ -12,16 +12,18 @@ public class AGMService {
     List<Edge> result = new ArrayList<>();
 
     public List<Edge> generatePrim(List<List<Edge>> fork){
-        List<Integer> vertices = new ArrayList<>();
+        List<Integer> verticesExplored = new ArrayList<>();
         final List<Edge> listMin = new ArrayList<>();
-        vertices.add(0);
+
+        //ja adiciona o primeiro vertice aos vertices explorados
+        verticesExplored.add(0);
 
         //para encontrar a árvore geradora minima precisamos de um loop
         //de nVertices - 1, para encontrar todas as arestas
         for(int i = 0; i < fork.size() - 1; i++){
 
             //dentro dos vertices que ja foram passados, pega as menores arestas
-            vertices.forEach((vertex) -> {
+            verticesExplored.forEach((vertex) -> {
 
                 //pega a lista de arestas do vertice desejado
                 List<Edge> list = fork.get(vertex);
@@ -31,7 +33,7 @@ public class AGMService {
                     list = list.stream()
                             // o filter é necessário para nao ser escolhida uma aresta com um vertice que ja estava na lista,
                             // dessa forma faria um ciclo
-                            .filter((e) -> !vertices.contains(e.getSecondVertex().getVertexId() - 1))
+                            .filter((e) -> !verticesExplored.contains(e.getSecondVertex().getVertexId() - 1))
                             .sorted(Comparator.comparingInt(Edge::getDisparity))
                             .collect(Collectors.toList());
 
@@ -54,7 +56,7 @@ public class AGMService {
             fork.get(min.getFirstVertex().getVertexId() - 1).remove(min);
 
             //adicionar o vertice da aresta menor encontrada na lista de vertice que serao buscados na proxima iteracao
-            vertices.add(min.getSecondVertex().getVertexId() - 1 );
+            verticesExplored.add(min.getSecondVertex().getVertexId() - 1 );
 
             //limpar lista de menores
             listMin.clear();
