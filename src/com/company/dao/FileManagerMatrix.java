@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class FileManagerMatrix extends FileManager<List<Matrix>> {
     @Override
     protected String getFileName() {
-        return "src/com/company/data/disparity.txt";
+        return "src/com/company/data/Matriz_1.txt";
     }
 
     @Override
