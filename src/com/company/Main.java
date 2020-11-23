@@ -36,7 +36,7 @@ public class Main {
         Integer count = 0;
 
         for (List<Edge> value : result) {
-            System.out.println("Vertice " + count);
+            System.out.println("Vertice " + count + 1);
 
             for (Edge edge : value) {
                 System.out.println("\tAresta " + value.indexOf(edge) + " = " + edge.toString());
