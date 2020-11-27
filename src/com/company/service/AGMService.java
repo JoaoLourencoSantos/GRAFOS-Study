@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 public class AGMService {
 
@@ -80,4 +81,67 @@ public class AGMService {
                     + edge.getSecondVertex().getVertexId());
         });
     }
+    
+    public void findGroups(List<Edge> list) {
+    	list = removeItens(list);
+    	System.out.println("--------------------------------------------------------"); 	 
+    	getGroups(list);
+    }
+    
+    private List<Edge> removeItens(List<Edge> list) {
+    	var maior = 0;
+    	var index = 0;
+    	var count = 1;   	
+    	
+    	while(count <= 2) {
+    		for (Edge edge : list) {
+        		if(edge.getDisparity() > maior) {
+                	maior = edge.getDisparity();
+                	index = list.indexOf(edge);
+                }
+        	}        	
+        	list.remove(index);
+        	maior = 0;
+        	index = 0;
+        	count++;
+    	}    
+    	return list;
+    }
+    
+    private void getGroups(List<Edge> list) {
+    	var grupoPrincipal = new ArrayList<Edge>(); 
+    	var grupoTemp = new ArrayList<Edge>();  
+    	var countGroups = 0;
+    	
+    	while(list.size() != 0) {    	
+    		countGroups++;
+    		System.out.println("Grupo " + countGroups);
+    		grupoPrincipal.clear();
+	    	grupoPrincipal.add(list.get(0)); 
+	    	list.remove(0);	
+	    	System.out.println(grupoPrincipal.get(0).getFirstVertex().getVertexId()+ " - " + grupoPrincipal.get(0).getSecondVertex().getVertexId());
+	    	
+	    	var size = grupoPrincipal.size();
+	    	while(size != 0) {
+		    	for (Edge element : new ArrayList<Edge>(grupoPrincipal)) {
+		    		for (Edge edge : new ArrayList<Edge>(list)) {    		
+		    			if(element.getFirstVertex().getVertexId() == edge.getFirstVertex().getVertexId()
+			    		   || element.getSecondVertex().getVertexId() == edge.getSecondVertex().getVertexId()
+			    		   || element.getFirstVertex().getVertexId() == edge.getSecondVertex().getVertexId()
+			    		   || element.getSecondVertex().getVertexId() == edge.getFirstVertex().getVertexId()) {
+			            	grupoTemp.add(edge);
+			            	System.out.println(edge.getFirstVertex().getVertexId() + " - " + edge.getSecondVertex().getVertexId() );
+			    			list.remove(list.indexOf(edge));			    					            				    			
+			            }
+		    		}
+			    }  	    			    	
+		    	
+		    	grupoPrincipal.clear();
+	    		grupoPrincipal.addAll(grupoTemp);	    		
+	    		size = grupoPrincipal.size();
+	    		grupoTemp.clear();
+	    	}	
+    	}
+    }  	  	
+       
 }

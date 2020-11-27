@@ -28,6 +28,8 @@ public class Main {
 
         //JA TEMOS A LISTA DE ARESTAS QUE REPRESENTA A ARVORE GERADORA MINIMA...
         List<Edge> edges = agmService.generatePrim(result);
+		
+		agmService.findGroups(edges);
     }
 
 
